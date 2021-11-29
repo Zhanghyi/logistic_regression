@@ -5,6 +5,7 @@
 |  ----  | ----  |
 | train set  | 0.837 |
 | dev set  | 0.835 |
+
 ###在测试集上的结果
 [查看](https://raw.githubusercontent.com/Zhanghyi/logistic_regression/main/output/testset.json)
 ###loss曲线图
