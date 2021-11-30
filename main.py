@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     # 2. 利用训练集更新权重
     classifier = LogisticRegressionBinaryClassifier(iterations=5000)
-    classifier.train(X_train, y_train)
+    classifier.train(X_train, y_train, X_dev, y_dev)
 
     # 3. 对训练集进行分类
     y_train_pred = classifier.predict(X_train)
@@ -24,4 +24,4 @@ if __name__ == '__main__':
     save_data(X_test, y_test, 'testset.json')
 
     # 6. 保存loss曲线图
-    save_loss_history(classifier.loss_history)
+    save_loss_history(classifier.train_loss_history, classifier.val_loss_history)

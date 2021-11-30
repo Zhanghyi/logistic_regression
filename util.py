@@ -24,9 +24,11 @@ def accuracy(y_pred, y_label):
     return float(sum(y_pred == y_label)) / float(len(y_label))
 
 
-def save_loss_history(loss_history):
+def save_loss_history(train, val):
     plt.title("loss history")
     plt.xlabel("iterations")
     plt.ylabel("loss")
-    plt.plot(range(len(loss_history)), loss_history)
+    plt.plot(range(len(train)), train, color='green', label='train loss')
+    plt.plot(range(len(val)), val, color='red', label='val loss')
+    plt.legend()
     plt.savefig(abspath + '/output/loss history.png')
