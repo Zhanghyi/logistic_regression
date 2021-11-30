@@ -7,9 +7,10 @@ def sigmoid(x):
 
 
 class LogisticRegressionBinaryClassifier():
-    def __init__(self, iterations=10000, learning_rate=0.01):
+    def __init__(self, iterations=10000, learning_rate=0.01, weight_decay=1.0):
         self.iterations = iterations
         self.learning_rate = learning_rate
+        self.weight_decay = weight_decay
         self.weight = None  # 权重 + 偏置 长度是特征个数 + 1
         self.loss_history = []
         self.n_feature = 0  # 特征个数
@@ -32,18 +33,20 @@ class LogisticRegressionBinaryClassifier():
         X_1 = np.hstack((X, np.ones((len(X), 1))))
         return np.round(sigmoid(np.matmul(X_1, self.weight)))
 
-    # loss: (1/m)*(y * log(sigmoid(wx+b)) + (1-y) * log(1-sigmoid(wx+b)))
+    # loss: (1/m)*(-y * log(sigmoid(wx+b)) - (1-y) * log(1-sigmoid(wx+b)) + 1/2*λw^2)
     def _loss(self, X_1, y):
         res = sigmoid(np.matmul(X_1, self.weight))
         res = np.matmul(y.T, np.log(res)) + np.matmul((1 - y).T, np.log(1 - res))
+        res -= 0.5 * self.weight_decay * np.square(self.weight[:-1])
         res = - res / self.n_samples
         return res
 
-    # gradient: (1/m)*((sigmoid(wx+b) - y) * x)
+    # gradient: (1/m)*((sigmoid(wx+b) - y) * x + λw)
     def _gradient(self, X_1, y):
         res = np.matmul(X_1, self.weight)
         res = sigmoid(res)
         res = res - y
         res = np.matmul(X_1.T, res)
+        res = res + self.weight_decay * np.hstack((self.weight[:-1], np.zeros((1,))))
         res = res / self.n_samples
         return res

@@ -8,7 +8,7 @@ if __name__ == '__main__':
     X_test = load_data('test')
 
     # 2. 利用训练集更新权重
-    classifier = LogisticRegressionBinaryClassifier(iterations=5000, learning_rate=0.01)
+    classifier = LogisticRegressionBinaryClassifier(iterations=5000)
     classifier.train(X_train, y_train)
 
     # 3. 对训练集进行分类
