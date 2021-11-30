@@ -15,8 +15,7 @@ def load_data(data_category):
 
 
 def save_data(X, y, file_name):
-    p = abspath + '/output/' + file_name
-    with open(p, 'w') as f:
+    with open(abspath + '/output/' + file_name, 'w') as f:
         f.write(json.dumps([(X[i], int(y[i])) for i in range(len(X))]))
         f.close()
 
@@ -25,7 +24,7 @@ def accuracy(y_pred, y_label):
     return float(sum(y_pred == y_label)) / float(len(y_label))
 
 
-def draw_loss_history(loss_history):
+def save_loss_history(loss_history):
     plt.title("loss history")
     plt.xlabel("iterations")
     plt.ylabel("loss")

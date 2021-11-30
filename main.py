@@ -15,13 +15,13 @@ if __name__ == '__main__':
     y_train_pred = classifier.predict(X_train)
     print('prediction accuracy on train set is {}'.format(accuracy(y_train_pred, y_train)))
 
-    # 3. 对验证集进行分类
+    # 4. 对验证集进行分类
     y_dev_pred = classifier.predict(X_dev)
     print('prediction accuracy on dev set is {}'.format(accuracy(y_dev_pred, y_dev)))
 
-    # 4. 对测试集进行分类
+    # 5. 对测试集进行分类
     y_test = classifier.predict(X_test)
     save_data(X_test, y_test, 'testset.json')
 
-    # 5. 保存loss曲线图
-    draw_loss_history(classifier.loss_history)
+    # 6. 保存loss曲线图
+    save_loss_history(classifier.loss_history)
